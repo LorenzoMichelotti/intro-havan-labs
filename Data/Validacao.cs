@@ -16,9 +16,7 @@ namespace Data
                 dado = Console.ReadLine().Trim();
                 if (dado.Equals(String.Empty) || !dado.Contains('@') || !dado.EndsWith(".com"))
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Dado Invalido");
-                    Console.ResetColor();
+                    TxtMod.ColorText("Dado Inválido, tente novamente.", ConsoleColor.Red);
                 }
                 else
                 {
@@ -36,9 +34,7 @@ namespace Data
                 dado = Console.ReadLine().Trim();
                 if (dado.Trim().Equals(String.Empty))
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Dado Invalido");
-                    Console.ResetColor();
+                    TxtMod.ColorText("Dado Inválido, tente novamente.", ConsoleColor.Red);
                 }
             }
             while (String.IsNullOrEmpty(dado));
@@ -52,9 +48,7 @@ namespace Data
                 dado = Console.ReadLine().Trim();
                 if (String.IsNullOrEmpty(dado))
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Dado Invalido");
-                    Console.ResetColor();
+                    TxtMod.ColorText("Dado Inválido, tente novamente.", ConsoleColor.Red);
                 }
                 else
                 {
@@ -63,6 +57,7 @@ namespace Data
                 }
             }
             while (true);
+            dado = dado.ToLower();
             dado = dado.Substring(0, 1).ToUpper() + dado.Substring(1);
             return dado;
         }
@@ -77,9 +72,7 @@ namespace Data
                 }
                 catch (Exception)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Valor inválido, tente novamente.");
-                    Console.ResetColor();
+                    TxtMod.ColorText("Dado Inválido, tente novamente.", ConsoleColor.Red);
                 }
             } while (true);
         }

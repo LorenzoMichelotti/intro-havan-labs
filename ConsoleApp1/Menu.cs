@@ -18,12 +18,12 @@ namespace ConsoleApp1
             Escolhas();
         }
 
-        private static void Rodape()
+        private void Rodape()
         {
             Console.Write("Escolha uma opção\t");
         }
 
-        private static void Opcoes()
+        private void Opcoes()
         {
             Console.WriteLine("\t1-Cadastrar Usuario");
             Console.WriteLine("\t2-Cadastrar Produto");
@@ -31,14 +31,10 @@ namespace ConsoleApp1
             Console.WriteLine("\t4-Sair");
         }
 
-        private static void Cabecalho()
+        private void Cabecalho()
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("--------------Havan Labs--------------");
-            Console.ResetColor();
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("--------------Bem-Vindo--------------");
-            Console.ResetColor();
+            TxtMod.ColorText("--------------Havan Labs--------------", ConsoleColor.Cyan);
+            TxtMod.ColorText("--------------Bem-Vindo--------------", ConsoleColor.Gray);
         }
 
         public void Escolhas()
@@ -53,8 +49,23 @@ namespace ConsoleApp1
                         string resposta = String.Empty;
                         do
                         {
-                            Usuario user = new Usuario();
-                            user.Cadastro();
+                            Console.Clear();
+                            Console.WriteLine("Cadastro do usuario\n");
+                            Console.Write("Nome: ");
+                            string nome = Validacao.ValidaString(true);
+                            Console.Write("Sobrenome: ");
+                            string sobrenome = Validacao.ValidaString(true);
+                            Console.Write("Idade: ");
+                            int idade = Validacao.ValidaInt(); Console.Clear();
+                            Console.Write("E-mail: ");
+                            string email = Validacao.ValidaEmail(); Console.Clear();
+                            Console.Write("Endereço: ");
+                            string endereco = Validacao.ValidaString(); Console.Clear();
+                            TxtMod.ColorText("Cadastro Concluído!", ConsoleColor.Green);
+                            Console.ReadLine();
+                            Console.Clear();
+
+                            Usuario user = new Usuario(nome, sobrenome, idade, email, endereco);
                             usuarios.Add(user);
                             Console.WriteLine("Deseja cadastrar outro usuario? (y/n)");
                             resposta = Console.ReadLine(); Console.Clear();
@@ -63,9 +74,7 @@ namespace ConsoleApp1
                         break;
                     case 2:
                         Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("Em implementação...");
-                        Console.ResetColor();
+                        TxtMod.ColorText("Em implementação...", ConsoleColor.Yellow);
                         Console.ReadLine();
                         Console.Clear();
                         MontaMenu();
@@ -82,28 +91,26 @@ namespace ConsoleApp1
                         Console.ReadLine();
                         break;
                     default:
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Opção inválida! Tente novamente");
-                        Console.ResetColor();
+                        TxtMod.ColorText("Opção inválida! Tente novamente", ConsoleColor.Red);
                         break;
                 }
             } while (opcao < 0 || opcao > 4);
         }
 
-        private static void MostrarListaUsuarios(List<Usuario> usuarios)
+        private void MostrarListaUsuarios(List<Usuario> usuarios)
         {
             Console.Clear();
             Console.WriteLine("Lista de Usuarios:");
             if (usuarios.Count <= 0)
             {
-                Console.WriteLine("Nenhum Usuário cadastrado.");
+                TxtMod.ColorText("Nenhum Usuário cadastrado.", ConsoleColor.Yellow);
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Gray;
                 foreach (var user in usuarios)
                 {
-                    Console.WriteLine($"\n\nNome: {user.nome} {user.sobrenome} \n{user.idade} anos de idade \nE-mail: {user.email}\nEndereço: {user.endereco}");
+                    Console.WriteLine($"\n\nNome: {user.Nome} {user.Sobrenome} \n{user.Idade} anos de idade \nE-mail: {user.Email}\nEndereço: {user.Endereco}");
                 }
                 Console.ResetColor();
             }
