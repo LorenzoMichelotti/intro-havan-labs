@@ -9,7 +9,6 @@ namespace WebApp.Controllers
 {
     public class UsuarioController : Controller
     {
-        List<Usuario> listaUsuarios = new List<Usuario>();
         public ActionResult Index()
         {
             return View();
@@ -17,9 +16,12 @@ namespace WebApp.Controllers
 
         public ActionResult List()
         {
-            Usuario u1 = new Usuario("Lorenzo", "Michelotti", 20, "lomichelotti@hotmail.com", "Brusque");
-            listaUsuarios.Add(u1);
-            return View(listaUsuarios);
+            List<Usuario> model = new List<Usuario>();
+            using (var context = new HavanLabsContext())
+            {
+                model = context.Usuarios.ToList();
+            }
+            return View(model);
         }
 
         public ActionResult Create()
@@ -29,21 +31,58 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult Create(Usuario model)
         {
-            listaUsuarios.Add(model);
+            using (var context = new HavanLabsContext())
+            {
+                context.Usuarios.Add(model);
+                context.SaveChanges();
+            }
             return RedirectToAction("List");
         }
 
-        public ActionResult Edit()
+        public ActionResult Update(int id)
+        {
+            Usuario model = new Usuario();
+            using (var context = new HavanLabsContext())
+            {
+                model = context.Usuarios.Find(id);
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Update(Usuario model)
+        {
+            using (var context = new HavanLabsContext())
+            {
+                context.Entry(model).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+            return RedirectToAction("List");
+        }
+
+        public ActionResult Details(int id)
+        {
+            Usuario model = new Usuario();
+            using (var context = new HavanLabsContext())
+            {
+                model = context.Usuarios.Find(id);
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Details(Usuario model)
         {
             return View();
         }
 
-        public ActionResult Details()
+        public ActionResult Delete(int id)
         {
-            //Usuario model = new Usuario("Lorenzo", "Michelotti", 20, "lomichelotti@hotmail.com", "Brusque");
-            //listaUsuarios.Add(model);
-            //return View(model);
-            return View();
+            using (var context = new HavanLabsContext())
+            {
+                Usuario model = context.Usuarios.Find(id);
+                context.Entry(model).State = System.Data.Entity.EntityState.Deleted;
+                context.SaveChanges();
+            }
+            return RedirectToAction("List");
         }
     }
 }

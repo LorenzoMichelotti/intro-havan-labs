@@ -1,0 +1,9 @@
+comandos nuget
+
+Install-Package EntityFramework
+
+Enable-Migrations
+
+Add-Migration CreateTableUsuario
+
+Update-Database -Verbose

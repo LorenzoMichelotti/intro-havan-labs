@@ -1,10 +1,13 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace Data
 {
     public class Usuario
     {
         //Encapsulamento - Propriedade
+        [Key]
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public string Email { get; set; }
