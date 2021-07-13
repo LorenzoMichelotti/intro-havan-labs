@@ -9,6 +9,7 @@ namespace WebApp.Controllers
 {
     public class UsuarioController : Controller
     {
+        UsuarioRepository repository = new UsuarioRepository();
         public ActionResult Index()
         {
             return View();
@@ -16,12 +17,7 @@ namespace WebApp.Controllers
 
         public ActionResult List()
         {
-            List<Usuario> model = new List<Usuario>();
-            using (var context = new HavanLabsContext())
-            {
-                model = context.Usuarios.ToList();
-            }
-            return View(model);
+            return View(repository.ReadAll());
         }
 
         public ActionResult Create()
@@ -31,42 +27,24 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult Create(Usuario model)
         {
-            using (var context = new HavanLabsContext())
-            {
-                context.Usuarios.Add(model);
-                context.SaveChanges();
-            }
+            repository.Create(model);
             return RedirectToAction("List");
         }
 
         public ActionResult Update(int id)
         {
-            Usuario model = new Usuario();
-            using (var context = new HavanLabsContext())
-            {
-                model = context.Usuarios.Find(id);
-            }
-            return View(model);
+            return View(repository.ReadById(id));
         }
         [HttpPost]
         public ActionResult Update(Usuario model)
         {
-            using (var context = new HavanLabsContext())
-            {
-                context.Entry(model).State = System.Data.Entity.EntityState.Modified;
-                context.SaveChanges();
-            }
+            repository.Update(model);
             return RedirectToAction("List");
         }
 
         public ActionResult Details(int id)
         {
-            Usuario model = new Usuario();
-            using (var context = new HavanLabsContext())
-            {
-                model = context.Usuarios.Find(id);
-            }
-            return View(model);
+            return View(repository.ReadById(id));
         }
         [HttpPost]
         public ActionResult Details(Usuario model)
@@ -76,12 +54,12 @@ namespace WebApp.Controllers
 
         public ActionResult Delete(int id)
         {
-            using (var context = new HavanLabsContext())
-            {
-                Usuario model = context.Usuarios.Find(id);
-                context.Entry(model).State = System.Data.Entity.EntityState.Deleted;
-                context.SaveChanges();
-            }
+            return View(repository.ReadById(id));
+        }
+        [HttpPost]
+        public ActionResult Delete(Usuario model)
+        {
+            repository.Delete(model);
             return RedirectToAction("List");
         }
     }
