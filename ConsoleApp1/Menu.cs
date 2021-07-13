@@ -74,24 +74,5 @@ namespace ConsoleApp1
                 }
             } while (opcao < 0 || opcao > 4);
         }
-
-        //private void MostrarListaUsuarios(List<Usuario> usuarios)
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("Lista de Usuarios:");
-        //    if (usuarios.Count <= 0)
-        //    {
-        //        TxtMod.ColorText("Nenhum Usuário cadastrado.", ConsoleColor.Yellow);
-        //    }
-        //    else
-        //    {
-        //        Console.ForegroundColor = ConsoleColor.Gray;
-        //        foreach (var user in usuarios)
-        //        {
-        //            Console.WriteLine($"\n\nNome: {user.Nome} {user.Sobrenome} \n{user.Idade} anos de idade \nE-mail: {user.Email}\nEndereço: {user.Endereco}");
-        //        }
-        //        Console.ResetColor();
-        //    }
-        //}
     }
 }
