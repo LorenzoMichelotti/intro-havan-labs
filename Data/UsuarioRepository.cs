@@ -15,6 +15,10 @@ namespace Data
             using (HavanLabsContext context = new HavanLabsContext())
             {
                 context.Usuarios.Add(model);
+
+                Migrations.CreateTableProduto createTableProduto = new Migrations.CreateTableProduto();
+                createTableProduto.ProdutoCreateTable(System.DateTime.Now.ToString());
+
                 context.SaveChanges();
             }
         }

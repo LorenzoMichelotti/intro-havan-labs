@@ -56,7 +56,13 @@
     <Compile Include="Migrations\202107121912558_CreateTableUsuario.designer.cs">
       <DependentUpon>202107121912558_CreateTableUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107131344346_CreateTableProduto.cs" />
+    <Compile Include="Migrations\202107131344346_CreateTableProduto.designer.cs">
+      <DependentUpon>202107131344346_CreateTableProduto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="productRepository.cs" />
+    <Compile Include="Produto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TxtMod.cs" />
     <Compile Include="Usuario.cs" />
@@ -70,6 +76,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202107121912558_CreateTableUsuario.resx">
       <DependentUpon>202107121912558_CreateTableUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107131344346_CreateTableProduto.resx">
+      <DependentUpon>202107131344346_CreateTableProduto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

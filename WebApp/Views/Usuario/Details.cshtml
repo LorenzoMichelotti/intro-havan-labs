@@ -51,9 +51,19 @@
             @Html.DisplayFor(model => model.Idade)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.MeusProdutos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MeusProdutos)
+            @Html.ActionLink("Ver todos", "ReadAllProducts", new { id = Model.Id }) |
+            @Html.ActionLink("Add Product", "AddProduct", new { id = Model.Id }) |
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Update", "Update",  new { id=Model.Id }) |
     @Html.ActionLink("Back to List", "List")
 </p>

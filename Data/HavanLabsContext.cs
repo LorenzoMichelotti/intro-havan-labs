@@ -11,10 +11,12 @@ namespace Data
     {
         //tabela de usuarios
         public DbSet<Usuario> Usuarios { get; set; }
+        public System.Data.Entity.DbSet<Data.Produto> Produtoes { get; set; }
 
         public HavanLabsContext() : base(@"Data Source=localhost\sqlexpress;Initial Catalog=HavanLabs;Integrated Security=True")
         {
 
         }
+
     }
 }

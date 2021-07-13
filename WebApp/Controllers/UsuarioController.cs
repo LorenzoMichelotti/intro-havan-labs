@@ -9,7 +9,8 @@ namespace WebApp.Controllers
 {
     public class UsuarioController : Controller
     {
-        UsuarioRepository repository = new UsuarioRepository();
+        UsuarioRepository userRepository = new UsuarioRepository();
+        productRepository productRepository = new productRepository();
         public ActionResult Index()
         {
             return View();
@@ -17,7 +18,7 @@ namespace WebApp.Controllers
 
         public ActionResult List()
         {
-            return View(repository.ReadAll());
+            return View(userRepository.ReadAll());
         }
 
         public ActionResult Create()
@@ -27,24 +28,24 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult Create(Usuario model)
         {
-            repository.Create(model);
+            userRepository.Create(model);
             return RedirectToAction("List");
         }
 
         public ActionResult Update(int id)
         {
-            return View(repository.ReadById(id));
+            return View(userRepository.ReadById(id));
         }
         [HttpPost]
         public ActionResult Update(Usuario model)
         {
-            repository.Update(model);
+            userRepository.Update(model);
             return RedirectToAction("List");
         }
 
         public ActionResult Details(int id)
         {
-            return View(repository.ReadById(id));
+            return View(userRepository.ReadById(id));
         }
         [HttpPost]
         public ActionResult Details(Usuario model)
@@ -54,13 +55,31 @@ namespace WebApp.Controllers
 
         public ActionResult Delete(int id)
         {
-            return View(repository.ReadById(id));
+            return View(userRepository.ReadById(id));
         }
         [HttpPost]
         public ActionResult Delete(Usuario model)
         {
-            repository.Delete(model);
+            userRepository.Delete(model);
             return RedirectToAction("List");
+        }
+
+
+        //PRODUTOS
+        public ActionResult AddProduct(int id)
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddProduct(Produto model)
+        {
+            productRepository.Create(model);
+            return RedirectToAction("List");
+        }
+
+        public ActionResult ReadAllProducts()
+        {
+            return View(productRepository.ReadAll());
         }
     }
 }

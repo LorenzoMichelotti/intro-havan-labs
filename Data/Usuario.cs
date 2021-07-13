@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System;
+using System.Collections.Generic;
 
 namespace Data
 {
@@ -13,6 +14,7 @@ namespace Data
         public string Email { get; set; }
         public string Endereco { get; set; }
         public int Idade { get; set; }
+        public List<Produto> MeusProdutos { get; set; }
 
         //Construtor
         public Usuario(string nome, string sobrenome, int idade, string email, string endereco)
