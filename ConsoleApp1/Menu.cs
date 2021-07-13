@@ -9,6 +9,7 @@ namespace ConsoleApp1
 {
     class Menu
     {
+        ModuloUsuario moduloUsuario = new ModuloUsuario();
         public List<Usuario> usuarios = new List<Usuario>();
         public void MontaMenu()
         {
@@ -46,30 +47,7 @@ namespace ConsoleApp1
                 switch (opcao)
                 {
                     case 1:
-                        string resposta = String.Empty;
-                        do
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Cadastro do usuario\n");
-                            Console.Write("Nome: ");
-                            string nome = Validacao.ValidaString(true);
-                            Console.Write("Sobrenome: ");
-                            string sobrenome = Validacao.ValidaString(true);
-                            Console.Write("Idade: ");
-                            int idade = Validacao.ValidaInt(); Console.Clear();
-                            Console.Write("E-mail: ");
-                            string email = Validacao.ValidaEmail(); Console.Clear();
-                            Console.Write("Endereço: ");
-                            string endereco = Validacao.ValidaString(); Console.Clear();
-                            TxtMod.ColorText("Cadastro Concluído!", ConsoleColor.Green);
-                            Console.ReadLine();
-                            Console.Clear();
-
-                            Usuario user = new Usuario(nome, sobrenome, idade, email, endereco);
-                            usuarios.Add(user);
-                            Console.WriteLine("Deseja cadastrar outro usuario? (y/n)");
-                            resposta = Console.ReadLine(); Console.Clear();
-                        } while (resposta == "y");
+                        moduloUsuario.Create();
                         MontaMenu();
                         break;
                     case 2:
@@ -80,7 +58,7 @@ namespace ConsoleApp1
                         MontaMenu();
                         break;
                     case 3:
-                        MostrarListaUsuarios(usuarios);
+                        moduloUsuario.ReadAll();
                         Console.ReadLine();
                         Console.Clear();
                         MontaMenu();
@@ -97,23 +75,23 @@ namespace ConsoleApp1
             } while (opcao < 0 || opcao > 4);
         }
 
-        private void MostrarListaUsuarios(List<Usuario> usuarios)
-        {
-            Console.Clear();
-            Console.WriteLine("Lista de Usuarios:");
-            if (usuarios.Count <= 0)
-            {
-                TxtMod.ColorText("Nenhum Usuário cadastrado.", ConsoleColor.Yellow);
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Gray;
-                foreach (var user in usuarios)
-                {
-                    Console.WriteLine($"\n\nNome: {user.Nome} {user.Sobrenome} \n{user.Idade} anos de idade \nE-mail: {user.Email}\nEndereço: {user.Endereco}");
-                }
-                Console.ResetColor();
-            }
-        }
+        //private void MostrarListaUsuarios(List<Usuario> usuarios)
+        //{
+        //    Console.Clear();
+        //    Console.WriteLine("Lista de Usuarios:");
+        //    if (usuarios.Count <= 0)
+        //    {
+        //        TxtMod.ColorText("Nenhum Usuário cadastrado.", ConsoleColor.Yellow);
+        //    }
+        //    else
+        //    {
+        //        Console.ForegroundColor = ConsoleColor.Gray;
+        //        foreach (var user in usuarios)
+        //        {
+        //            Console.WriteLine($"\n\nNome: {user.Nome} {user.Sobrenome} \n{user.Idade} anos de idade \nE-mail: {user.Email}\nEndereço: {user.Endereco}");
+        //        }
+        //        Console.ResetColor();
+        //    }
+        //}
     }
 }
